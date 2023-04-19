@@ -1,0 +1,44 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% include 'header.html' %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="">
+    <h1>PDF to Audio Converter</h1>
+    <h3><u>Information</u></h3>
+    <p>
+        Upload any PDF to convert to audio. The text found in the PDF once extracted has a max size limit of 100 KB. A
+        message will alert you if this is the case. Once converted to audio, it will redirect you to the response page,
+        which will show your uploaded PDF and automatically start playing the audio. All pages will automatically be converted
+        unless specified.
+    </p>
+
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data" onsubmit="loading();">
+            {{ form.csrf_token }}
+            {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+        </form>
+
+        <br>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <br>
+
+        <div id="loading">
+            <h3><div class="spinner-border" style="width: 2rem; height: 2rem;" role="status"></div>   Loading...</h3>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

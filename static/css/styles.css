@@ -1,0 +1,18 @@
+body{
+    padding: 10px 50px;
+    background-color: #F6F1F1;
+}
+
+h1 {
+    color: #146C94;
+}
+
+.form {
+    width: 300px;
+    padding-top: 50px;
+}
+
+div#loading {
+    display: none;
+    padding-top: 1rem;
+}
